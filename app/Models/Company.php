@@ -22,4 +22,9 @@ class Company extends Model
     {
         return $this->hasManyThrough(Report::class, Vacancy::class);
     }
+
+    public function noAnswerRate(): ?float
+    {
+        return Report::silenceShare($this->reports);
+    }
 }

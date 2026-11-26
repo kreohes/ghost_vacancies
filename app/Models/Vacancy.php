@@ -34,4 +34,28 @@ class Vacancy extends Model
     {
         return $this->hasMany(Report::class);
     }
+
+    public function ghostRisk(): ?float
+    {
+        return Report::silenceShare($this->reports);
+    }
+
+    public function riskLabel(): string
+    {
+        $risk = $this->ghostRisk();
+
+        if ($risk === null) {
+            return 'not enough data';
+        }
+
+        if ($risk >= 0.6) {
+            return 'high';
+        }
+
+        if ($risk >= 0.3) {
+            return 'medium';
+        }
+
+        return 'low';
+    }
 }
