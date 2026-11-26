@@ -34,6 +34,18 @@ PR-AUC of a random classifier would be about 0.048 (the share of fraudulent post
 
 The title alone is not enough, the description carries most of the signal. Balanced class weights raise recall but lower precision and PR-AUC, so the unweighted model is exported.
 
+## From probability to label
+
+The site turns the probability into a label (`ScamModel::label()` in `app/Support/ScamModel.php`). The thresholds come from the same 3 held-out splits:
+
+| Probability | Label | Precision | Recall |
+|---|---|---|---|
+| ≥ 0.5 | likely scam | 0.866 ± 0.034 | 0.676 ± 0.040 |
+| ≥ 0.2 | suspicious or likely scam | 0.707 ± 0.058 | 0.748 ± 0.047 |
+| < 0.2 | looks normal | | |
+
+Precision is the share of flagged postings that really were fraudulent; recall is the share of fraudulent postings that were flagged.
+
 ## How to retrain
 
 ```

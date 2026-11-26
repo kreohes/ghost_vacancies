@@ -52,6 +52,8 @@ Next to the ghost risk, a vacancy with a description gets a **scam signal**: the
 - Model: logistic regression on a binary bag of words (title + description), trained in `ml/train.py` on the public EMSCAD dataset (17,880 postings from 2012-2014, 866 fraudulent, CC0).
 - Quality on a held-out 20% (3 seeds): PR-AUC 0.78 ± 0.04, ROC-AUC 0.94 ± 0.01. Details in `ml/README.md`.
 - The weights are exported to `resources/ml/scam-model.json`; `app/Support/ScamModel.php` adds up the weights of the words in the text and applies the sigmoid, so no Python is needed at runtime.
+- The probability becomes a label: **likely scam** from 50% (precision 0.87 on held-out data), **suspicious** from 20%, otherwise **looks normal**. Thresholds are constants in `ScamModel`.
+- The same check works for a pasted posting text on the link check page (`/check`).
 - Caveat: the labels mean *fraud*, not *ghost vacancy*. It is a hint, not a verdict.
 
 ## Pages
