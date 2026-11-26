@@ -47,6 +47,11 @@ class Vacancy extends Model
         return $this->hasMany(Report::class);
     }
 
+    public function countedReports()
+    {
+        return $this->reports->filter(fn (Report $report) => $report->countsForRisk());
+    }
+
     public function ghostRisk(): ?float
     {
         return Report::silenceShare($this->reports);
