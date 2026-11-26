@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vacancy;
+use App\Support\ScamModel;
 use Illuminate\Http\Request;
 
 class CheckController extends Controller
@@ -21,5 +22,20 @@ class CheckController extends Controller
         }
 
         return view('check', ['url' => $validated['url']]);
+    }
+
+    public function text(Request $request)
+    {
+        $validated = $request->validate([
+            'url' => ['required', 'url', 'max:255'],
+            'text' => ['required', 'string', 'min:30', 'max:10000'],
+        ]);
+
+        return view('check', [
+            'url' => $validated['url'],
+            'text' => $validated['text'],
+            'scamProbability' => ScamModel::probability($validated['text']),
+            'scamWords' => ScamModel::topWords($validated['text']),
+        ]);
     }
 }

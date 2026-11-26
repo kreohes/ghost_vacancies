@@ -23,5 +23,40 @@
                 <a href="{{ route('welcome') }}" class="rounded-full px-5 py-2.5 font-semibold text-fern hover:bg-butter">Check another link</a>
             </div>
         </section>
+
+        <section class="rounded-4xl bg-white p-6 sm:p-8">
+            <h2 class="font-display text-2xl font-semibold">Check the text of the posting</h2>
+            <p class="mt-2 text-moss">Paste the job description. A simple model looks for words that often appear in fraudulent job ads.</p>
+
+            <form action="{{ route('check.text') }}" method="POST" class="mt-4 space-y-4">
+                @csrf
+                <input type="hidden" name="url" value="{{ $url }}">
+                <x-form.textarea name="text" label="Text of the posting" :value="$text ?? ''" />
+                <button type="submit" class="cursor-pointer rounded-full bg-dusk px-6 py-3 font-semibold text-white hover:bg-fern">Check the text</button>
+            </form>
+
+            @isset($scamProbability)
+                <div class="mt-6 rounded-3xl bg-butter p-5">
+                    <div class="flex items-baseline justify-between gap-4">
+                        <p class="font-display text-xl font-semibold">Scam signal</p>
+                        <p class="font-display text-4xl font-bold">{{ round($scamProbability * 100) }}%</p>
+                    </div>
+                    <div class="mt-3 h-4 rounded-full bg-white">
+                        <div class="h-4 rounded-full bg-dusk" style="width: {{ round($scamProbability * 100) }}%"></div>
+                    </div>
+                    @if ($scamProbability >= 0.5 && $scamWords)
+                        <p class="mt-4 flex flex-wrap items-center gap-2">
+                            <span class="mr-1">Words that raise it most:</span>
+                            @foreach ($scamWords as $word)
+                                <span class="rounded-full bg-peach px-3.5 py-1 font-semibold">{{ $word }}</span>
+                            @endforeach
+                        </p>
+                    @endif
+                    <p class="mt-4 text-sm leading-relaxed text-moss">
+                        This only says whether the text looks like old fraudulent job ads (2012-2014). It cannot tell if anybody is actually hiring, so it can be wrong.
+                    </p>
+                </div>
+            @endisset
+        </section>
     </div>
 </x-app-layout>

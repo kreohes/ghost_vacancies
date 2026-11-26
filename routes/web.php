@@ -30,6 +30,7 @@ Route::get('/companies', [CompanyController::class, 'index'])->name('companies.i
 Route::get('/companies/{id}', [CompanyController::class, 'show'])->name('companies.show');
 
 Route::get('/check', [CheckController::class, 'url'])->name('check.url');
+Route::post('/check/text', [CheckController::class, 'text'])->name('check.text');
 
 /*
  * Authentication routes
