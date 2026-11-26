@@ -33,3 +33,11 @@ test('a vacancy with description gets a probability between 0 and 1', function (
 
     expect($vacancy->scamProbability())->toBeGreaterThan(0.5)->toBeLessThan(1);
 });
+
+test('the vacancy page shows the scam signal only when there is a description', function () {
+    $withText = Vacancy::factory()->create(['description' => 'Work from home and earn money daily.']);
+    $withoutText = Vacancy::factory()->create(['description' => null]);
+
+    $this->get(route('vacancies.show', $withText))->assertOk()->assertSee('Scam signal');
+    $this->get(route('vacancies.show', $withoutText))->assertOk()->assertDontSee('Scam signal');
+});

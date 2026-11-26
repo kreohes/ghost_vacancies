@@ -27,6 +27,19 @@
                 <h3 class="font-semibold text-lg mb-2">Text of the posting</h3>
                 <p class="text-gray-700 whitespace-pre-line">{{ $vacancy->description }}</p>
             </div>
+
+            <div class="bg-white shadow-xs rounded-lg p-6 space-y-1">
+                <p>
+                    Scam signal: <strong>{{ round($vacancy->scamProbability() * 100) }}%</strong>
+                    <a href="{{ route('risk') }}#scam-signal" class="text-sm text-gray-500 underline ms-2">how is this calculated?</a>
+                </p>
+                @if ($vacancy->scamWords())
+                    <p class="text-gray-600">Words that raise it most: {{ implode(', ', $vacancy->scamWords()) }}</p>
+                @endif
+                <p class="text-sm text-gray-500">
+                    This is a separate signal from the ghost risk. A simple model compares the text with old fraudulent job ads (2012-2014); it does not know anything about ghost vacancies and can be wrong.
+                </p>
+            </div>
         @endif
 
         <div class="rounded-lg border border-indigo-200 bg-indigo-50 p-4">
