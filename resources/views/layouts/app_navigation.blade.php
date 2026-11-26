@@ -21,6 +21,9 @@
                         <x-breeze.nav-link :href="route('userzone.reports.index')" :active="request()->routeIs('userzone.reports.*')">
                             My reports
                         </x-breeze.nav-link>
+                        <x-breeze.nav-link :href="route('userzone.vacancies.index')" :active="request()->routeIs('userzone.vacancies.*')">
+                            My vacancies
+                        </x-breeze.nav-link>
                     @endauth
                 </div>
             </div>
@@ -99,6 +102,9 @@ Log Out
         <div class="pt-2 pb-3 space-y-1">
             <x-breeze.responsive-nav-link :href="route('userzone.reports.index')">
                 My reports
+            </x-breeze.responsive-nav-link>
+            <x-breeze.responsive-nav-link :href="route('userzone.vacancies.index')">
+                My vacancies
             </x-breeze.responsive-nav-link>
         </div>
 

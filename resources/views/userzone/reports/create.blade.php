@@ -8,6 +8,9 @@
             @csrf
 
             <x-form.select name="vacancy_id" label="Vacancy" :options="$vacancies" :value="$selectedVacancyId" placeholder="Choose a vacancy" />
+            <p class="text-sm text-gray-500">
+                Vacancy not in the list? <a href="{{ route('userzone.vacancies.create') }}" class="text-indigo-600 underline">Add it first</a>.
+            </p>
 
             <x-form.status-picker />
             <x-form.input name="applied_at" label="Applied on" type="date" />
