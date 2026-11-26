@@ -16,6 +16,22 @@
             <x-lantern-scene />
         </section>
 
+        <form action="{{ route('check.url') }}" method="GET" class="mt-4 rounded-3xl bg-white p-5 sm:p-6">
+            <label for="url" class="block font-display text-xl font-semibold">Got a link to a vacancy? Check it before you apply.</label>
+            <div class="mt-3 flex flex-wrap gap-3">
+                <input type="url" id="url" name="url" value="{{ old('url') }}" placeholder="https://..."
+                       @class([
+                           'min-w-0 flex-1 basis-64 rounded-2xl border-2 px-4 py-3 focus:outline-2 focus:outline-offset-2',
+                           'border-high bg-high-soft/50 focus:outline-high' => $errors->has('url'),
+                           'border-crust hover:border-fern focus:border-fern focus:outline-fern' => ! $errors->has('url'),
+                       ])>
+                <button type="submit" class="cursor-pointer rounded-full bg-dusk px-6 py-3 font-semibold text-white hover:bg-fern">Check vacancy</button>
+            </div>
+            @error('url')
+                <p class="mt-2 inline-block rounded-2xl bg-high-soft px-4 py-2 text-sm font-semibold text-high">{{ $message }}</p>
+            @enderror
+        </form>
+
         <ul class="mt-4 grid grid-cols-3 gap-3 text-center sm:gap-4">
             <li class="rounded-3xl bg-white px-2 py-4"><strong class="block font-display text-4xl font-bold">{{ $vacancyCount }}</strong><span class="text-moss">vacancies</span></li>
             <li class="rounded-3xl bg-white px-2 py-4"><strong class="block font-display text-4xl font-bold">{{ $companyCount }}</strong><span class="text-moss">companies</span></li>
