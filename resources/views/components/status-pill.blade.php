@@ -1,12 +1,14 @@
 @props(['status'])
 
 @php
-    $style = match ($status) {
-        'silence' => 'bg-gray-800 text-white',
-        'replied' => 'bg-sky-100 text-sky-800',
-        'interview' => 'bg-emerald-100 text-emerald-800',
-        default => 'bg-gray-100 text-gray-700',
+    $colors = match ($status) {
+        'silence' => 'bg-silence-soft text-silence',
+        'replied' => 'bg-replied-soft text-replied',
+        'interview' => 'bg-interview-soft text-interview',
+        default => 'bg-nodata-soft text-nodata',
     };
 @endphp
 
-<span class="inline-block rounded-full px-2 py-0.5 text-xs font-semibold {{ $style }}">{{ $status }}</span>
+<span class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full py-1 pr-3 pl-2 align-middle text-sm font-semibold {{ $colors }}">
+    <svg class="size-4" aria-hidden="true"><use href="#{{ $status }}"/></svg>{{ $status }}
+</span>

@@ -2,11 +2,14 @@
 
 @php
     $colors = match ($label) {
-        'high' => 'bg-red-100 text-red-800',
-        'medium' => 'bg-amber-100 text-amber-800',
-        'low' => 'bg-green-100 text-green-800',
-        default => 'bg-gray-100 text-gray-600',
+        'high' => 'bg-high-soft text-high',
+        'medium' => 'bg-medium-soft text-medium',
+        'low' => 'bg-low-soft text-low',
+        default => 'bg-nodata-soft text-nodata',
     };
 @endphp
 
-<span class="inline-block whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-semibold {{ $colors }}">{{ $label }}</span>
+<span class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full py-1 pr-3 pl-2 text-sm font-semibold {{ $colors }}">
+    <x-risk-ghosts :label="$label" size="size-4" />
+    {{ $label }}
+</span>
