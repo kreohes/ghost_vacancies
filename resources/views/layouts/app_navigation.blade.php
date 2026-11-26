@@ -18,8 +18,8 @@
                         </x-breeze.nav-link>
                     @endforeach
                     @auth
-                        <x-breeze.nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            Dashboard
+                        <x-breeze.nav-link :href="route('userzone.reports.index')" :active="request()->routeIs('userzone.reports.*')">
+                            My reports
                         </x-breeze.nav-link>
                     @endauth
                 </div>
@@ -97,8 +97,8 @@ Log Out
 
         @auth
         <div class="pt-2 pb-3 space-y-1">
-            <x-breeze.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                Dashboard
+            <x-breeze.responsive-nav-link :href="route('userzone.reports.index')">
+                My reports
             </x-breeze.responsive-nav-link>
         </div>
 
