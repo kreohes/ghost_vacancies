@@ -28,7 +28,7 @@
             @forelse ($vacancy->reports->sortByDesc('applied_at') as $report)
                 <div class="bg-white shadow-xs rounded-lg p-4 mb-2">
                     <p>
-                        <span class="font-semibold">{{ $report->status }}</span>
+                        <x-status-pill :status="$report->status" />
                         <span class="text-gray-500 text-sm">applied on {{ $report->applied_at->format('d.m.Y') }}</span>
                     </p>
                     @if ($report->comment)
