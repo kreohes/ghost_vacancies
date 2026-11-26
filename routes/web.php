@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Userzone\DashboardController;
 use App\Http\Controllers\Userzone\ProfileController;
@@ -17,6 +18,8 @@ Route::get('/risk', [PageController::class, 'risk'])->name('risk');
 
 Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
 Route::get('/vacancies/{id}', [VacancyController::class, 'show'])->name('vacancies.show');
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
+Route::get('/companies/{id}', [CompanyController::class, 'show'])->name('companies.show');
 
 /*
  * Authentication routes
