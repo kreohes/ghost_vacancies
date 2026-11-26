@@ -13,7 +13,7 @@
                 Company not in the list? <a href="{{ route('userzone.companies.create') }}" class="text-fern underline">Add it first</a>.
             </p>
             <x-form.textarea name="description" label="Text of the posting (optional)" />
-            <x-form.input name="url" label="Link to the original posting (optional)" type="url" />
+            <x-form.input name="url" label="Link to the original posting (optional)" type="url" :value="$url" />
             <x-form.input name="posted_at" label="Posted on (optional)" type="date" />
 
             <button type="submit" class="rounded-full bg-dusk px-4 py-2 text-white hover:bg-fern">Add vacancy</button>

@@ -21,6 +21,7 @@ class VacancyController extends Controller
         return view('userzone.vacancies.create', [
             'companies' => Company::orderBy('name')->pluck('name', 'id'),
             'selectedCompanyId' => $request->query('company_id'),
+            'url' => $request->query('url'),
         ]);
     }
 
