@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Userzone;
 use App\Http\Controllers\Controller;
 use App\Models\Report;
 use App\Models\Vacancy;
+use App\Notifications\NewReportOnYourVacancy;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -40,7 +41,12 @@ class ReportController extends Controller
             'vacancy_id.unique' => 'You already reported this vacancy. Edit your existing report instead.',
         ]);
 
-        auth()->user()->reports()->create($validated);
+        $report = auth()->user()->reports()->create($validated);
+
+        $author = $report->vacancy->user;
+        if ($author->id !== auth()->id()) {
+            $author->notify(new NewReportOnYourVacancy($report));
+        }
 
         return redirect()->route('userzone.reports.index');
     }
