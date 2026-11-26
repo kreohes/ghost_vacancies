@@ -15,7 +15,7 @@ class AppLayout extends Component
             'Vacancies' => route('vacancies.index'),
             'Companies' => route('companies.index'),
             'About' => route('about'),
-            'How risk works' => route('risk'),
+            'Risk' => route('risk'),
         ];
     }
 
