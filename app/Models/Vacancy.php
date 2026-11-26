@@ -97,6 +97,15 @@ class Vacancy extends Model
         return ScamModel::probability($this->scamText());
     }
 
+    public function scamLabel(): ?string
+    {
+        if (! $this->description) {
+            return null;
+        }
+
+        return ScamModel::label($this->scamProbability());
+    }
+
     public function scamWords(): array
     {
         return ScamModel::topWords($this->scamText());

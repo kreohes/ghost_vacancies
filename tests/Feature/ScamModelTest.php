@@ -41,3 +41,17 @@ test('the vacancy page shows the scam signal only when there is a description', 
     $this->get(route('vacancies.show', $withText))->assertOk()->assertSee('Scam signal');
     $this->get(route('vacancies.show', $withoutText))->assertOk()->assertDontSee('Scam signal');
 });
+
+test('the scam label follows the thresholds', function () {
+    expect(ScamModel::label(0.9))->toBe('likely scam')
+        ->and(ScamModel::label(0.5))->toBe('likely scam')
+        ->and(ScamModel::label(0.3))->toBe('suspicious')
+        ->and(ScamModel::label(0.2))->toBe('suspicious')
+        ->and(ScamModel::label(0.05))->toBe('looks normal');
+});
+
+test('a vacancy without description has no scam label', function () {
+    $vacancy = Vacancy::factory()->create(['description' => null]);
+
+    expect($vacancy->scamLabel())->toBeNull();
+});

@@ -4,7 +4,24 @@ namespace App\Support;
 
 class ScamModel
 {
+    public const LIKELY_SCAM_FROM = 0.5;
+
+    public const SUSPICIOUS_FROM = 0.2;
+
     private static ?array $model = null;
+
+    public static function label(float $probability): string
+    {
+        if ($probability >= self::LIKELY_SCAM_FROM) {
+            return 'likely scam';
+        }
+
+        if ($probability >= self::SUSPICIOUS_FROM) {
+            return 'suspicious';
+        }
+
+        return 'looks normal';
+    }
 
     public static function probability(string $text): float
     {
