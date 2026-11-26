@@ -53,28 +53,7 @@
 
         <section class="mt-14">
             <h2 class="font-display text-3xl font-bold">What the ghosts mean</h2>
-            <ul class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                <li class="rounded-3xl bg-high-soft p-5 text-high">
-                    <x-risk-ghosts label="high" size="size-9" />
-                    <p class="mt-3 font-display text-xl font-semibold">High risk</p>
-                    <p class="text-dusk">60% or more of the reports are silence</p>
-                </li>
-                <li class="rounded-3xl bg-medium-soft p-5 text-medium">
-                    <x-risk-ghosts label="medium" size="size-9" />
-                    <p class="mt-3 font-display text-xl font-semibold">Medium risk</p>
-                    <p class="text-dusk">30% to 60% silence</p>
-                </li>
-                <li class="rounded-3xl bg-low-soft p-5 text-low">
-                    <x-risk-ghosts label="low" size="size-9" />
-                    <p class="mt-3 font-display text-xl font-semibold">Low risk</p>
-                    <p class="text-dusk">Less than 30% silence</p>
-                </li>
-                <li class="rounded-3xl bg-nodata-soft p-5 text-nodata">
-                    <x-risk-ghosts label="not enough data" size="size-9" />
-                    <p class="mt-3 font-display text-xl font-semibold">Not enough data</p>
-                    <p class="text-dusk">Fewer than 3 counted reports</p>
-                </li>
-            </ul>
+            <x-ghost-legend class="mt-5" />
             <p class="mt-4 text-moss">
                 A silence report counts once the application is 14 days old, because some answers take a while.
                 <a href="{{ route('risk') }}" class="font-semibold text-fern underline underline-offset-2">How the risk is calculated</a>
