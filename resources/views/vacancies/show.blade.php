@@ -11,6 +11,10 @@
     @endphp
 
     <div class="mx-auto max-w-3xl space-y-4 px-4 py-8 md:py-12">
+        @if (session('status'))
+            <p class="rounded-3xl bg-white px-5 py-3 font-semibold text-fern">{{ session('status') }}</p>
+        @endif
+
         <div class="px-1 pb-2">
             <h1 class="font-display text-4xl leading-none font-bold sm:text-5xl">{{ $vacancy->title }}</h1>
             <p class="mt-2 text-xl text-moss">at <a href="{{ route('companies.show', $vacancy->company) }}" class="font-semibold text-fern underline decoration-2 underline-offset-4">{{ $vacancy->company->name }}</a></p>

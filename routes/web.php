@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\VacancyController as AdminVacancyController;
+use App\Http\Controllers\CheckController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Userzone\CompanyController as UserCompanyController;
@@ -27,6 +28,8 @@ Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.i
 Route::get('/vacancies/{id}', [VacancyController::class, 'show'])->name('vacancies.show');
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 Route::get('/companies/{id}', [CompanyController::class, 'show'])->name('companies.show');
+
+Route::get('/check', [CheckController::class, 'url'])->name('check.url');
 
 /*
  * Authentication routes

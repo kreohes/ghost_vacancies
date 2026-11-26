@@ -32,6 +32,13 @@ class Vacancy extends Model
         ];
     }
 
+    public static function findByUrl(string $url): ?Vacancy
+    {
+        $url = rtrim(trim($url), '/');
+
+        return self::where('url', $url)->orWhere('url', $url.'/')->first();
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);
