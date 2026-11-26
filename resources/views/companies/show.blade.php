@@ -21,7 +21,7 @@
 
         <div>
             <h3 class="font-semibold text-lg mb-2">Vacancies</h3>
-            <x-vacancy-table :vacancies="$company->vacancies" :show-company="false" />
+            <x-vacancy-cards :vacancies="$company->vacancies" :show-company="false" />
         </div>
     </div>
 </x-app-layout>

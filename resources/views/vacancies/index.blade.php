@@ -4,6 +4,6 @@
     </x-slot>
 
     <div class="max-w-5xl mx-auto py-8 px-4">
-        <x-vacancy-table :vacancies="$vacancies" />
+        <x-vacancy-cards :vacancies="$vacancies" />
     </div>
 </x-app-layout>
