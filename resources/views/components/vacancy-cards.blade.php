@@ -28,6 +28,9 @@
                     @if ($showCompany)
                         <p class="mt-1 text-moss">at <a href="{{ route('companies.show', $vacancy->company) }}" class="underline decoration-crust decoration-2 underline-offset-4 hover:decoration-fern">{{ $vacancy->company->name }}</a></p>
                     @endif
+                    @if (in_array($vacancy->scamLabel(), ['likely scam', 'suspicious']))
+                        <p class="mt-3"><x-scam-badge :label="$vacancy->scamLabel()" /></p>
+                    @endif
                     <p class="mt-auto flex justify-between gap-3 pt-4 text-sm text-moss">
                         <span>Posted {{ $vacancy->posted_at?->format('d.m.Y') ?? 'unknown' }}</span>
                         <span>{{ $vacancy->reports->count() }} reports</span>

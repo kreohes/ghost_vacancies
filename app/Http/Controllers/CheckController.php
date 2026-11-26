@@ -31,10 +31,13 @@ class CheckController extends Controller
             'text' => ['required', 'string', 'min:30', 'max:10000'],
         ]);
 
+        $probability = ScamModel::probability($validated['text']);
+
         return view('check', [
             'url' => $validated['url'],
             'text' => $validated['text'],
-            'scamProbability' => ScamModel::probability($validated['text']),
+            'scamProbability' => $probability,
+            'scamLabel' => ScamModel::label($probability),
             'scamWords' => ScamModel::topWords($validated['text']),
         ]);
     }

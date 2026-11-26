@@ -92,8 +92,11 @@
             </section>
 
             <section class="rounded-4xl bg-white p-6 sm:p-8">
-                <div class="flex items-baseline justify-between gap-4">
-                    <h2 class="font-display text-2xl font-semibold">Scam signal</h2>
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <h2 class="font-display text-2xl font-semibold">Scam signal</h2>
+                        <p class="mt-1"><x-scam-badge :label="$vacancy->scamLabel()" /></p>
+                    </div>
                     <p class="font-display text-4xl font-bold">{{ round($vacancy->scamProbability() * 100) }}%</p>
                 </div>
                 <div class="mt-3 h-4 rounded-full bg-butter">

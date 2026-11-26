@@ -37,8 +37,11 @@
 
             @isset($scamProbability)
                 <div class="mt-6 rounded-3xl bg-butter p-5">
-                    <div class="flex items-baseline justify-between gap-4">
-                        <p class="font-display text-xl font-semibold">Scam signal</p>
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <p class="font-display text-xl font-semibold">Scam signal</p>
+                            <p class="mt-1"><x-scam-badge :label="$scamLabel" /></p>
+                        </div>
                         <p class="font-display text-4xl font-bold">{{ round($scamProbability * 100) }}%</p>
                     </div>
                     <div class="mt-3 h-4 rounded-full bg-white">
