@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\Userzone\DashboardController;
 use App\Http\Controllers\Userzone\ProfileController;
 use App\Http\Controllers\Userzone\ReportController;
+use App\Http\Controllers\Userzone\VacancyController as UserVacancyController;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('user')->name('userzone.')->group(function () {
         Route::resource('reports', ReportController::class);
+        Route::resource('vacancies', UserVacancyController::class)->except('show');
     });
 
     // For the user's profile management
