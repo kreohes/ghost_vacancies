@@ -74,6 +74,15 @@ class ReportController extends Controller
         return redirect()->route('userzone.reports.show', $report->id);
     }
 
+    public function destroy($id)
+    {
+        $report = auth()->user()->reports()->findOrFail($id);
+
+        $report->delete();
+
+        return redirect()->route('userzone.reports.index');
+    }
+
     private function vacancyOptions(): array
     {
         $options = [];
