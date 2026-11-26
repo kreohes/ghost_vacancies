@@ -20,6 +20,16 @@ class Vacancy extends Model
         ];
     }
 
+    public static function validationRules(): array
+    {
+        return [
+            'title' => ['required', 'string', 'min:3', 'max:255'],
+            'company_id' => ['required', 'exists:companies,id'],
+            'url' => ['nullable', 'url', 'max:255'],
+            'posted_at' => ['nullable', 'date', 'before_or_equal:today'],
+        ];
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);

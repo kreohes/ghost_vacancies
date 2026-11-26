@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Userzone;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\Vacancy;
 use Illuminate\Http\Request;
 
 class VacancyController extends Controller
@@ -25,7 +26,7 @@ class VacancyController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate($this->rules());
+        $validated = $request->validate(Vacancy::validationRules());
 
         $vacancy = auth()->user()->vacancies()->create($validated);
 
@@ -46,7 +47,7 @@ class VacancyController extends Controller
     {
         $vacancy = auth()->user()->vacancies()->findOrFail($id);
 
-        $validated = $request->validate($this->rules());
+        $validated = $request->validate(Vacancy::validationRules());
 
         $vacancy->update($validated);
 
@@ -60,15 +61,5 @@ class VacancyController extends Controller
         $vacancy->delete();
 
         return redirect()->route('userzone.vacancies.index');
-    }
-
-    private function rules(): array
-    {
-        return [
-            'title' => ['required', 'string', 'min:3', 'max:255'],
-            'company_id' => ['required', 'exists:companies,id'],
-            'url' => ['nullable', 'url', 'max:255'],
-            'posted_at' => ['nullable', 'date', 'before_or_equal:today'],
-        ];
     }
 }
