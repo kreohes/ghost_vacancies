@@ -1,22 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800">Add a vacancy</h2>
+        <h2 class="font-display text-4xl font-bold">Add a vacancy</h2>
     </x-slot>
 
     <div class="max-w-2xl mx-auto py-8 px-4">
-        <form action="{{ route('userzone.vacancies.store') }}" method="POST" class="bg-white shadow-xs rounded-lg p-6 space-y-4">
+        <form action="{{ route('userzone.vacancies.store') }}" method="POST" class="bg-white rounded-3xl p-6 space-y-4">
             @csrf
 
             <x-form.input name="title" label="Job title" />
             <x-form.select name="company_id" label="Company" :options="$companies" :value="$selectedCompanyId" placeholder="Choose a company" />
-            <p class="text-sm text-gray-500">
-                Company not in the list? <a href="{{ route('userzone.companies.create') }}" class="text-indigo-600 underline">Add it first</a>.
+            <p class="text-sm text-moss">
+                Company not in the list? <a href="{{ route('userzone.companies.create') }}" class="text-fern underline">Add it first</a>.
             </p>
             <x-form.textarea name="description" label="Text of the posting (optional)" />
             <x-form.input name="url" label="Link to the original posting (optional)" type="url" />
             <x-form.input name="posted_at" label="Posted on (optional)" type="date" />
 
-            <button type="submit" class="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700">Add vacancy</button>
+            <button type="submit" class="rounded-full bg-dusk px-4 py-2 text-white hover:bg-fern">Add vacancy</button>
         </form>
     </div>
 </x-app-layout>

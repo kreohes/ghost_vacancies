@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800">How the risk is calculated</h2>
+        <h2 class="font-display text-4xl font-bold">How the risk is calculated</h2>
     </x-slot>
 
-    <div class="max-w-3xl mx-auto py-8 px-4 space-y-4 text-gray-700">
+    <div class="max-w-3xl mx-auto py-8 px-4 space-y-4 text-dusk">
         <p>
             The ghost risk of a vacancy is the share of its reports with status <strong>silence</strong>.
         </p>
@@ -26,7 +26,7 @@
             The "no answer" rate of a company uses the same rule, but over the reports of all its vacancies together.
         </p>
 
-        <h3 id="scam-signal" class="font-semibold text-lg text-gray-800 pt-4">Scam signal</h3>
+        <h3 id="scam-signal" class="font-display text-2xl font-semibold pt-4">Scam signal</h3>
         <p>
             If a vacancy has the text of the posting, we also show a scam signal: how much the text looks like a fraudulent job ad.
             It is a separate number and does not change the ghost risk.

@@ -9,6 +9,6 @@
 <div class="mb-4 flex gap-2 text-sm">
     @foreach ($tabs as $label => $routeName)
         <a href="{{ route($routeName) }}"
-           class="rounded-md px-3 py-1 {{ request()->routeIs($routeName) ? 'bg-gray-800 text-white' : 'bg-white text-gray-700 hover:bg-gray-200' }}">{{ $label }}</a>
+           class="rounded-full px-3 py-1 {{ request()->routeIs($routeName) ? 'bg-dusk text-white' : 'bg-white text-dusk hover:bg-crust' }}">{{ $label }}</a>
     @endforeach
 </div>

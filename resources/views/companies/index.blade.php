@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800">Companies</h2>
+        <h2 class="font-display text-4xl font-bold">Companies</h2>
     </x-slot>
 
     <div class="max-w-5xl mx-auto py-8 px-4">
-        <table class="w-full bg-white shadow-xs rounded-lg text-sm">
-            <thead class="text-left text-gray-500 border-b">
+        <table class="w-full bg-white rounded-3xl text-sm">
+            <thead class="text-left text-moss border-b">
                 <tr>
                     <th class="p-3">Company</th>
                     <th class="p-3">Vacancies</th>
@@ -17,13 +17,13 @@
                 @foreach ($companies as $company)
                     <tr class="border-b last:border-0">
                         <td class="p-3">
-                            <a href="{{ route('companies.show', $company) }}" class="text-indigo-600 hover:underline">{{ $company->name }}</a>
+                            <a href="{{ route('companies.show', $company) }}" class="text-fern hover:underline">{{ $company->name }}</a>
                         </td>
                         <td class="p-3">{{ $company->vacancies_count }}</td>
                         <td class="p-3">{{ $company->reports->count() }}</td>
                         <td class="p-3">
                             @if ($company->noAnswerRate() === null)
-                                <span class="text-gray-500">not enough data</span>
+                                <span class="text-moss">not enough data</span>
                             @else
                                 {{ round($company->noAnswerRate() * 100) }}%
                             @endif
