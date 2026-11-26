@@ -32,6 +32,27 @@ class VacancyController extends Controller
         return redirect()->route('vacancies.show', $vacancy);
     }
 
+    public function edit($id)
+    {
+        $vacancy = auth()->user()->vacancies()->findOrFail($id);
+
+        return view('userzone.vacancies.edit', [
+            'vacancy' => $vacancy,
+            'companies' => Company::orderBy('name')->pluck('name', 'id'),
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $vacancy = auth()->user()->vacancies()->findOrFail($id);
+
+        $validated = $request->validate($this->rules());
+
+        $vacancy->update($validated);
+
+        return redirect()->route('vacancies.show', $vacancy);
+    }
+
     private function rules(): array
     {
         return [
