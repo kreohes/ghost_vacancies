@@ -53,6 +53,15 @@ class VacancyController extends Controller
         return redirect()->route('vacancies.show', $vacancy);
     }
 
+    public function destroy($id)
+    {
+        $vacancy = auth()->user()->vacancies()->findOrFail($id);
+
+        $vacancy->delete();
+
+        return redirect()->route('userzone.vacancies.index');
+    }
+
     private function rules(): array
     {
         return [
