@@ -12,6 +12,12 @@ class DashboardController extends Controller
      */
     public function __invoke(): View
     {
-        return view('userzone.dashboard');
+        $user = auth()->user();
+
+        return view('userzone.dashboard', [
+            'reportCount' => $user->reports()->count(),
+            'vacancyCount' => $user->vacancies()->count(),
+            'waitingCount' => $user->reports()->where('status', 'silence')->count(),
+        ]);
     }
 }

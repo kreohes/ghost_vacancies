@@ -1,17 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Dashboard
-        </h2>
+        <h2 class="font-semibold text-xl text-gray-800">Hi {{ auth()->user()->name }}!</h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xs sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    You're logged in!
-                </div>
-            </div>
-        </div>
+    <div class="max-w-5xl mx-auto py-8 px-4 grid gap-4 sm:grid-cols-3">
+        <a href="{{ route('userzone.reports.index') }}" class="bg-white shadow-xs rounded-lg p-6 hover:ring-2 hover:ring-indigo-200">
+            <p class="text-3xl font-bold">{{ $reportCount }}</p>
+            <p class="text-gray-600">reports you left</p>
+        </a>
+        <a href="{{ route('userzone.reports.index') }}" class="bg-white shadow-xs rounded-lg p-6 hover:ring-2 hover:ring-indigo-200">
+            <p class="text-3xl font-bold">{{ $waitingCount }}</p>
+            <p class="text-gray-600">applications still in silence</p>
+        </a>
+        <a href="{{ route('userzone.vacancies.index') }}" class="bg-white shadow-xs rounded-lg p-6 hover:ring-2 hover:ring-indigo-200">
+            <p class="text-3xl font-bold">{{ $vacancyCount }}</p>
+            <p class="text-gray-600">vacancies you added</p>
+        </a>
     </div>
 </x-app-layout>
