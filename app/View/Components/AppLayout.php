@@ -7,9 +7,18 @@ use Illuminate\View\View;
 
 class AppLayout extends Component
 {
-    /**
-     * Get the view / contents that represents the component.
-     */
+    public array $menu = [];
+
+    public function __construct()
+    {
+        $this->menu = [
+            'Vacancies' => route('vacancies.index'),
+            'Companies' => route('companies.index'),
+            'About' => route('about'),
+            'How risk works' => route('risk'),
+        ];
+    }
+
     public function render(): View
     {
         return view('layouts.app');

@@ -36,6 +36,15 @@
     <main>
         {{ $slot }}
     </main>
+
+    <footer class="border-t bg-white mt-12">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex flex-wrap gap-6 text-sm text-gray-500">
+            <span>{{ config('app.name') }}</span>
+            @foreach ($menu as $label => $link)
+                <a href="{{ $link }}" class="hover:text-gray-800">{{ $label }}</a>
+            @endforeach
+        </div>
+    </footer>
 </div>
 </body>
 </html>

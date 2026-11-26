@@ -12,6 +12,11 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @foreach ($menu as $label => $link)
+                        <x-breeze.nav-link :href="$link" :active="str_starts_with(request()->url(), $link)">
+                            {{ $label }}
+                        </x-breeze.nav-link>
+                    @endforeach
                     @auth
                         <x-breeze.nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             Dashboard
@@ -77,6 +82,12 @@ Log Out
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+        <div class="pt-2 pb-3 space-y-1">
+            @foreach ($menu as $label => $link)
+                <x-breeze.responsive-nav-link :href="$link">{{ $label }}</x-breeze.responsive-nav-link>
+            @endforeach
+        </div>
+
         @guest
             <div class="pt-2 pb-3 space-y-1">
                 <x-breeze.responsive-nav-link :href="route('login')">Log in</x-breeze.responsive-nav-link>
