@@ -52,6 +52,28 @@ class ReportController extends Controller
         return view('userzone.reports.show', compact('report'));
     }
 
+    public function edit($id)
+    {
+        $report = auth()->user()->reports()->findOrFail($id);
+
+        return view('userzone.reports.edit', compact('report'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $report = auth()->user()->reports()->findOrFail($id);
+
+        $validated = $request->validate([
+            'status' => ['required', Rule::in(Report::STATUSES)],
+            'applied_at' => ['required', 'date', 'before_or_equal:today'],
+            'comment' => ['nullable', 'string', 'max:1000'],
+        ]);
+
+        $report->update($validated);
+
+        return redirect()->route('userzone.reports.show', $report->id);
+    }
+
     private function vacancyOptions(): array
     {
         $options = [];
