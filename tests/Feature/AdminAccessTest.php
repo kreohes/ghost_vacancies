@@ -28,3 +28,10 @@ test('an admin can delete any report', function () {
 
     expect(Report::find($report->id))->toBeNull();
 });
+
+test('a normal user cannot manage vacancies or companies', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)->get(route('admin.vacancies.index'))->assertForbidden();
+    $this->actingAs($user)->get(route('admin.companies.index'))->assertForbidden();
+});

@@ -24,6 +24,11 @@
                         <x-breeze.nav-link :href="route('userzone.vacancies.index')" :active="request()->routeIs('userzone.vacancies.*')">
                             My vacancies
                         </x-breeze.nav-link>
+                        @if (auth()->user()->is_admin)
+                            <x-breeze.nav-link :href="route('admin.reports.index')" :active="request()->routeIs('admin.*')">
+                                Admin
+                            </x-breeze.nav-link>
+                        @endif
                     @endauth
                 </div>
             </div>
@@ -106,6 +111,9 @@ Log Out
             <x-breeze.responsive-nav-link :href="route('userzone.vacancies.index')">
                 My vacancies
             </x-breeze.responsive-nav-link>
+            @if (auth()->user()->is_admin)
+                <x-breeze.responsive-nav-link :href="route('admin.reports.index')">Admin</x-breeze.responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

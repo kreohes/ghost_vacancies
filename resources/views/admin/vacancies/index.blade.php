@@ -5,6 +5,8 @@
     </x-slot>
 
     <div class="max-w-6xl mx-auto py-8 px-4">
+        <x-admin-tabs />
+
         <table class="w-full bg-white shadow-xs rounded-lg text-sm">
             <thead class="text-left text-gray-500 border-b">
                 <tr>
