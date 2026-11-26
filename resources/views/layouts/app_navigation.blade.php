@@ -1,145 +1,43 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100" >
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('welcome') }}" class="font-bold text-lg text-gray-800">
-                        👻 {{ config('app.name') }}
-                    </a>
-                </div>
+<header class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-3 px-4 py-4">
+    <a href="{{ route('welcome') }}" class="flex items-center gap-2.5 font-display text-xl font-bold">
+        <span class="grid size-10 place-items-center rounded-full bg-lamp">
+            <svg class="size-6 fill-dusk animate-float motion-reduce:animate-none" aria-hidden="true"><use href="#ghost"/></svg>
+        </span>
+        {{ config('app.name') }}
+    </a>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @foreach ($menu as $label => $link)
-                        <x-breeze.nav-link :href="$link" :active="str_starts_with(request()->url(), $link)">
-                            {{ $label }}
-                        </x-breeze.nav-link>
-                    @endforeach
-                    @auth
-                        <x-breeze.nav-link :href="route('userzone.reports.index')" :active="request()->routeIs('userzone.reports.*')">
-                            My reports
-                        </x-breeze.nav-link>
-                        <x-breeze.nav-link :href="route('userzone.vacancies.index')" :active="request()->routeIs('userzone.vacancies.*')">
-                            My vacancies
-                        </x-breeze.nav-link>
-                        @if (auth()->user()->is_admin)
-                            <x-breeze.nav-link :href="route('admin.reports.index')" :active="request()->routeIs('admin.*')">
-                                Admin
-                            </x-breeze.nav-link>
-                        @endif
-                    @endauth
-                </div>
-            </div>
-
-            @guest
-                <div class="hidden sm:flex sm:items-center sm:gap-4">
-                    <a href="{{ route('login') }}" class="text-sm text-gray-600 hover:text-gray-900">Log in</a>
-                    <a href="{{ route('register') }}" class="text-sm text-gray-600 hover:text-gray-900">Register</a>
-                </div>
-            @endguest
-
-            <!-- Settings Dropdown -->
-            @auth
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-breeze.dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-hidden transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-breeze.dropdown-link :href="route('profile.edit')">
-Profile
-                        </x-breeze.dropdown-link>
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-breeze.dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-Log Out
-                            </x-breeze.dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-breeze.dropdown>
-            </div>
-            @endauth
-
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            @foreach ($menu as $label => $link)
-                <x-breeze.responsive-nav-link :href="$link">{{ $label }}</x-breeze.responsive-nav-link>
-            @endforeach
-        </div>
-
-        @guest
-            <div class="pt-2 pb-3 space-y-1">
-                <x-breeze.responsive-nav-link :href="route('login')">Log in</x-breeze.responsive-nav-link>
-                <x-breeze.responsive-nav-link :href="route('register')">Register</x-breeze.responsive-nav-link>
-            </div>
-        @endguest
+    <nav class="order-last flex w-full flex-wrap items-center gap-1 font-medium lg:order-none lg:w-auto lg:flex-1">
+        @foreach ($menu as $label => $link)
+            <x-nav-pill :href="$link" :active="str_starts_with(request()->url(), $link)">{{ $label }}</x-nav-pill>
+        @endforeach
 
         @auth
-        <div class="pt-2 pb-3 space-y-1">
-            <x-breeze.responsive-nav-link :href="route('userzone.reports.index')">
-                My reports
-            </x-breeze.responsive-nav-link>
-            <x-breeze.responsive-nav-link :href="route('userzone.vacancies.index')">
-                My vacancies
-            </x-breeze.responsive-nav-link>
+            <x-nav-pill :href="route('userzone.reports.index')" :active="request()->routeIs('userzone.reports.*')">My reports</x-nav-pill>
+            <x-nav-pill :href="route('userzone.vacancies.index')" :active="request()->routeIs('userzone.vacancies.*')">My vacancies</x-nav-pill>
             @if (auth()->user()->is_admin)
-                <x-breeze.responsive-nav-link :href="route('admin.reports.index')">Admin</x-breeze.responsive-nav-link>
+                <x-nav-pill :href="route('admin.reports.index')" :active="request()->routeIs('admin.*')">Admin</x-nav-pill>
             @endif
-        </div>
+        @endauth
+    </nav>
 
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <x-breeze.responsive-nav-link :href="route('profile.edit')">
-                    Profile
-                </x-breeze.responsive-nav-link>
-
-                <!-- Authentication -->
+    @auth
+        <details class="relative ml-auto">
+            <summary class="flex cursor-pointer list-none items-center gap-2 rounded-full bg-white px-4 py-2 font-medium hover:bg-crust [&::-webkit-details-marker]:hidden">
+                {{ auth()->user()->name }} &#9662;
+            </summary>
+            <div class="absolute right-0 z-10 mt-2 w-44 rounded-2xl bg-white p-1.5 shadow-lg shadow-dusk/15">
+                <a href="{{ route('dashboard') }}" class="block rounded-xl px-3 py-2 hover:bg-butter">Dashboard</a>
+                <a href="{{ route('profile.edit') }}" class="block rounded-xl px-3 py-2 hover:bg-butter">Profile</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
-                    <x-breeze.responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        Log Out
-                    </x-breeze.responsive-nav-link>
+                    <button type="submit" class="block w-full cursor-pointer rounded-xl px-3 py-2 text-left hover:bg-butter">Log out</button>
                 </form>
             </div>
+        </details>
+    @else
+        <div class="ml-auto flex items-center gap-2 font-medium">
+            <a href="{{ route('login') }}" class="rounded-full px-4 py-2 hover:bg-crust">Log in</a>
+            <a href="{{ route('register') }}" class="rounded-full bg-dusk px-4 py-2 text-white hover:bg-fern">Register</a>
         </div>
-        @endauth
-    </div>
-</nav>
+    @endauth
+</header>
