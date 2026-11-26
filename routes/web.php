@@ -3,6 +3,7 @@
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Userzone\DashboardController;
 use App\Http\Controllers\Userzone\ProfileController;
+use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,9 @@ Route::get('/', WelcomeController::class)->name('welcome');
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/risk', [PageController::class, 'risk'])->name('risk');
+
+Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
+Route::get('/vacancies/{id}', [VacancyController::class, 'show'])->name('vacancies.show');
 
 /*
  * Authentication routes
