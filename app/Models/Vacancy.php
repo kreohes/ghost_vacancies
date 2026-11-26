@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\ScamModel;
 use Database\Factories\VacancyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -68,5 +69,24 @@ class Vacancy extends Model
         }
 
         return 'low';
+    }
+
+    public function scamText(): string
+    {
+        return $this->title.' '.$this->description;
+    }
+
+    public function scamProbability(): ?float
+    {
+        if (! $this->description) {
+            return null;
+        }
+
+        return ScamModel::probability($this->scamText());
+    }
+
+    public function scamWords(): array
+    {
+        return ScamModel::topWords($this->scamText());
     }
 }
