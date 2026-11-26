@@ -22,6 +22,13 @@
             <p class="text-sm text-gray-500">Added by {{ $vacancy->user->name }}</p>
         </div>
 
+        @if ($vacancy->description)
+            <div class="bg-white shadow-xs rounded-lg p-6">
+                <h3 class="font-semibold text-lg mb-2">Text of the posting</h3>
+                <p class="text-gray-700 whitespace-pre-line">{{ $vacancy->description }}</p>
+            </div>
+        @endif
+
         <div class="rounded-lg border border-indigo-200 bg-indigo-50 p-4">
             @guest
                 <a href="{{ route('login') }}" class="text-indigo-700 underline">Log in</a> to report what happened after you applied here.

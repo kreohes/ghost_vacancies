@@ -11,7 +11,7 @@ class Vacancy extends Model
     /** @use HasFactory<VacancyFactory> */
     use HasFactory;
 
-    protected $fillable = ['title', 'url', 'posted_at', 'company_id'];
+    protected $fillable = ['title', 'description', 'url', 'posted_at', 'company_id'];
 
     protected function casts(): array
     {
@@ -24,6 +24,7 @@ class Vacancy extends Model
     {
         return [
             'title' => ['required', 'string', 'min:3', 'max:255'],
+            'description' => ['nullable', 'string', 'max:10000'],
             'company_id' => ['required', 'exists:companies,id'],
             'url' => ['nullable', 'url', 'max:255'],
             'posted_at' => ['nullable', 'date', 'before_or_equal:today'],

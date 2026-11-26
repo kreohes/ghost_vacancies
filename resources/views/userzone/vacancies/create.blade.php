@@ -12,6 +12,7 @@
             <p class="text-sm text-gray-500">
                 Company not in the list? <a href="{{ route('userzone.companies.create') }}" class="text-indigo-600 underline">Add it first</a>.
             </p>
+            <x-form.textarea name="description" label="Text of the posting (optional)" />
             <x-form.input name="url" label="Link to the original posting (optional)" type="url" />
             <x-form.input name="posted_at" label="Posted on (optional)" type="date" />
 

@@ -10,6 +10,7 @@
 
             <x-form.input name="title" label="Job title" :value="$vacancy->title" />
             <x-form.select name="company_id" label="Company" :options="$companies" :value="$vacancy->company_id" />
+            <x-form.textarea name="description" label="Text of the posting (optional)" :value="$vacancy->description" />
             <x-form.input name="url" label="Link to the original posting (optional)" type="url" :value="$vacancy->url" />
             <x-form.input name="posted_at" label="Posted on (optional)" type="date" :value="$vacancy->posted_at?->format('Y-m-d')" />
 
