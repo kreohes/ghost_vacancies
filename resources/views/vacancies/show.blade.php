@@ -17,7 +17,10 @@
 
         <div class="px-1 pb-2">
             <h1 class="font-display text-4xl leading-none font-bold sm:text-5xl">{{ $vacancy->title }}</h1>
-            <p class="mt-2 text-xl text-moss">at <a href="{{ route('companies.show', $vacancy->company) }}" class="font-semibold text-fern underline decoration-2 underline-offset-4">{{ $vacancy->company->name }}</a></p>
+            <p class="mt-3 flex items-center gap-3 text-xl text-moss">
+                <x-company-logo :company="$vacancy->company" size="size-10" class="text-lg" />
+                <span>at <a href="{{ route('companies.show', $vacancy->company) }}" class="font-semibold text-fern underline decoration-2 underline-offset-4">{{ $vacancy->company->name }}</a></span>
+            </p>
             <dl class="mt-4 flex flex-wrap gap-x-8 gap-y-2">
                 <div class="flex gap-2"><dt class="text-moss">Posted</dt><dd class="font-medium">{{ $vacancy->posted_at?->format('d.m.Y') ?? 'unknown' }}</dd></div>
                 <div class="flex gap-2"><dt class="text-moss">Added by</dt><dd class="font-medium">{{ $vacancy->user->name }}</dd></div>

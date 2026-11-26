@@ -17,7 +17,10 @@
                 @foreach ($companies as $company)
                     <tr class="border-b last:border-0">
                         <td class="p-3">
-                            <a href="{{ route('companies.show', $company) }}" class="text-fern hover:underline">{{ $company->name }}</a>
+                            <a href="{{ route('companies.show', $company) }}" class="flex items-center gap-3 text-fern hover:underline">
+                                <x-company-logo :company="$company" size="size-9" />
+                                {{ $company->name }}
+                            </a>
                         </td>
                         <td class="p-3">{{ $company->vacancies_count }}</td>
                         <td class="p-3">{{ $company->reports->count() }}</td>

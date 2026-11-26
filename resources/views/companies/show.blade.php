@@ -1,10 +1,13 @@
 <x-app-layout>
     <div class="mx-auto max-w-5xl space-y-4 px-4 py-8">
-        <div class="px-1 pb-2">
-            <h1 class="font-display text-4xl leading-none font-bold sm:text-5xl">{{ $company->name }}</h1>
-            @if ($company->website)
-                <a href="{{ $company->website }}" target="_blank" rel="noopener" class="mt-2 inline-block font-semibold text-fern underline underline-offset-2">{{ $company->website }}</a>
-            @endif
+        <div class="flex items-center gap-5 px-1 pb-2">
+            <x-company-logo :company="$company" size="size-20" class="text-3xl" />
+            <div>
+                <h1 class="font-display text-4xl leading-none font-bold sm:text-5xl">{{ $company->name }}</h1>
+                @if ($company->website)
+                    <a href="{{ $company->website }}" target="_blank" rel="noopener" class="mt-2 inline-block font-semibold text-fern underline underline-offset-2">{{ $company->website }}</a>
+                @endif
+            </div>
         </div>
 
         <section class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-4xl bg-white p-6 sm:p-8">

@@ -8,7 +8,7 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        $companies = Company::with('reports')->withCount('vacancies')->orderBy('name')->get();
+        $companies = Company::with(['reports', 'media'])->withCount('vacancies')->orderBy('name')->get();
 
         return view('companies.index', compact('companies'));
     }
