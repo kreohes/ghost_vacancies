@@ -1,10 +1,10 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-display text-4xl font-bold">Admin · Vacancies</h2>
-        <p class="text-moss">Fix the wrong company, merge duplicates by deleting one, remove spam.</p>
-    </x-slot>
-
     <div class="max-w-6xl mx-auto py-8 px-4">
+        <div class="mb-6">
+            <h2 class="font-display text-4xl font-bold">Admin · Vacancies</h2>
+            <p class="text-moss">Fix the wrong company, merge duplicates by deleting one, remove spam.</p>
+        </div>
+
         <x-admin-tabs />
 
         <table class="w-full bg-white rounded-3xl text-sm">

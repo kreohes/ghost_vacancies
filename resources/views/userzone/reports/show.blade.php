@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-display text-4xl font-bold">Report on {{ $report->vacancy->title }}</h2>
-    </x-slot>
-
     <div class="max-w-2xl mx-auto py-8 px-4">
+        <div class="mb-6">
+            <h2 class="font-display text-4xl font-bold">Report on {{ $report->vacancy->title }}</h2>
+        </div>
+
         <div class="bg-white rounded-3xl p-6">
             <dl class="grid grid-cols-3 gap-y-3 text-sm">
                 <dt class="text-moss">Vacancy</dt>

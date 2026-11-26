@@ -1,10 +1,10 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-display text-4xl font-bold">Admin · Reports moderation</h2>
-        <p class="text-moss">All {{ $reports->count() }} reports, newest first. Delete fake or spam reports.</p>
-    </x-slot>
-
     <div class="max-w-6xl mx-auto py-8 px-4">
+        <div class="mb-6">
+            <h2 class="font-display text-4xl font-bold">Admin · Reports moderation</h2>
+            <p class="text-moss">All {{ $reports->count() }} reports, newest first. Delete fake or spam reports.</p>
+        </div>
+
         <x-admin-tabs />
 
         <table class="w-full bg-white rounded-3xl text-sm">

@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-display text-4xl font-bold">Companies</h2>
-    </x-slot>
-
     <div class="max-w-5xl mx-auto py-8 px-4">
+        <div class="mb-6">
+            <h2 class="font-display text-4xl font-bold">Companies</h2>
+        </div>
+
         <table class="w-full bg-white rounded-3xl text-sm">
             <thead class="text-left text-moss border-b">
                 <tr>

@@ -1,10 +1,10 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-display text-4xl font-bold">Add a company</h2>
-        <p class="text-moss">After saving you go straight back to adding your vacancy.</p>
-    </x-slot>
-
     <div class="max-w-2xl mx-auto py-8 px-4">
+        <div class="mb-6">
+            <h2 class="font-display text-4xl font-bold">Add a company</h2>
+            <p class="text-moss">After saving you go straight back to adding your vacancy.</p>
+        </div>
+
         <form action="{{ route('userzone.companies.store') }}" method="POST" class="bg-white rounded-3xl p-6 space-y-4">
             @csrf
 

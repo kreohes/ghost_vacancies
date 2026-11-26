@@ -1,12 +1,12 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex items-center justify-between">
+    <div class="max-w-3xl mx-auto py-8 px-4 space-y-3">
+        <div class="mb-6">
+            <div class="flex items-center justify-between">
             <h2 class="font-display text-4xl font-bold">Vacancies I added</h2>
             <a href="{{ route('userzone.vacancies.create') }}" class="rounded-full bg-dusk px-4 py-2 text-sm text-white hover:bg-fern">+ Add a vacancy</a>
+            </div>
         </div>
-    </x-slot>
 
-    <div class="max-w-3xl mx-auto py-8 px-4 space-y-3">
         @forelse ($vacancies as $vacancy)
             <div class="bg-white rounded-3xl p-4">
                 <div class="flex items-start justify-between gap-4">

@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-display text-4xl font-bold">Admin · Edit company</h2>
-    </x-slot>
-
     <div class="max-w-2xl mx-auto py-8 px-4">
+        <div class="mb-6">
+            <h2 class="font-display text-4xl font-bold">Admin · Edit company</h2>
+        </div>
+
         <form action="{{ route('admin.companies.update', $company->id) }}" method="POST" class="bg-white rounded-3xl p-6 space-y-4">
             @csrf
             @method('PUT')
