@@ -2,13 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\Report;
+use App\Models\Vacancy;
+
 class WelcomeController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
     public function __invoke()
     {
-        return view('welcome');
+        $highRiskVacancies = Vacancy::with(['company', 'reports'])
+            ->latest()
+            ->get()
+            ->filter(fn (Vacancy $vacancy) => $vacancy->riskLabel() === 'high')
+            ->take(5);
+
+        return view('welcome', [
+            'highRiskVacancies' => $highRiskVacancies,
+            'vacancyCount' => Vacancy::count(),
+            'companyCount' => Company::count(),
+            'reportCount' => Report::count(),
+        ]);
     }
 }
