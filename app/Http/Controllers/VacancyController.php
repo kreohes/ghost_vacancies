@@ -17,6 +17,11 @@ class VacancyController extends Controller
     {
         $vacancy = Vacancy::with(['company', 'user', 'reports'])->findOrFail($id);
 
-        return view('vacancies.show', compact('vacancy'));
+        $myReport = null;
+        if (auth()->check()) {
+            $myReport = $vacancy->reports->where('user_id', auth()->id())->first();
+        }
+
+        return view('vacancies.show', compact('vacancy', 'myReport'));
     }
 }

@@ -22,6 +22,20 @@
             <p class="text-sm text-gray-500">Added by {{ $vacancy->user->name }}</p>
         </div>
 
+        <div class="rounded-lg border border-indigo-200 bg-indigo-50 p-4">
+            @guest
+                <a href="{{ route('login') }}" class="text-indigo-700 underline">Log in</a> to report what happened after you applied here.
+            @else
+                @if ($myReport)
+                    You reported <x-status-pill :status="$myReport->status" /> on {{ $myReport->applied_at->format('d.m.Y') }}.
+                    <a href="{{ route('userzone.reports.edit', $myReport->id) }}" class="text-indigo-700 underline ms-2">Update status</a>
+                @else
+                    Applied here?
+                    <a href="{{ route('userzone.reports.create', ['vacancy_id' => $vacancy->id]) }}" class="ms-2 rounded-md bg-indigo-600 px-3 py-1 text-white hover:bg-indigo-700">Leave a report</a>
+                @endif
+            @endguest
+        </div>
+
         <div>
             <h3 class="font-semibold text-lg mb-2">Reports ({{ $vacancy->reports->count() }})</h3>
 
