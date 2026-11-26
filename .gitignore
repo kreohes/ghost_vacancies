@@ -22,3 +22,6 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Public dataset for ml/train.py, downloaded separately
+/ml/data
