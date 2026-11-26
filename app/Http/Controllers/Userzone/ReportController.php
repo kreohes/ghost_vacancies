@@ -45,6 +45,13 @@ class ReportController extends Controller
         return redirect()->route('userzone.reports.index');
     }
 
+    public function show($id)
+    {
+        $report = auth()->user()->reports()->findOrFail($id);
+
+        return view('userzone.reports.show', compact('report'));
+    }
+
     private function vacancyOptions(): array
     {
         $options = [];
