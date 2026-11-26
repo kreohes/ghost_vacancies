@@ -1,35 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    @include('layouts.head')
+</head>
+<body class="bg-butter font-body text-dusk antialiased">
+<x-icon-sprite />
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<div class="flex min-h-screen flex-col items-center px-4 pt-10 pb-10 sm:justify-center sm:pt-0">
+    <a href="{{ route('welcome') }}" class="flex items-center gap-2.5 font-display text-2xl font-bold">
+        <span class="grid size-11 place-items-center rounded-full bg-lamp">
+            <svg class="size-6 fill-dusk animate-float motion-reduce:animate-none" aria-hidden="true"><use href="#ghost"/></svg>
+        </span>
+        {{ config('app.name') }}
+    </a>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @else
-            <!-- Tailwind CSS & Alpine.js via CDN -->
-            <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-            <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.1/dist/cdn.min.js"></script>
-        @endif
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-breeze.application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
-        </div>
-    </body>
+    <div class="mt-6 w-full rounded-4xl bg-white p-6 sm:max-w-md sm:p-8">
+        {{ $slot }}
+    </div>
+</div>
+</body>
 </html>

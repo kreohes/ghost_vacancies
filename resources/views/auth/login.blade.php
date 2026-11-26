@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <h1 class="font-display text-3xl font-bold">Welcome back</h1>
+    <p class="mt-1 mb-6 text-moss">Log in to report what happened after you applied.</p>
+
     <!-- Session Status -->
     <x-breeze.auth-session-status class="mb-4" :status="session('status')" />
 
@@ -27,14 +30,14 @@
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded-sm border-gray-300 text-indigo-600 shadow-xs focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">Remember me</span>
+                <input id="remember_me" type="checkbox" class="rounded-sm border-crust accent-dusk" name="remember">
+                <span class="ms-2 text-sm text-moss">Remember me</span>
             </label>
         </div>
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                <a class="underline text-sm text-moss hover:text-dusk rounded-md focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-fern" href="{{ route('password.request') }}">
                     Forgot your password?
                 </a>
             @endif

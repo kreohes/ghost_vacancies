@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <h1 class="font-display text-3xl font-bold">Create an account</h1>
+    <p class="mt-1 mb-6 text-moss">Add vacancies and tell others what happened after you applied.</p>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -40,7 +43,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+            <a class="underline text-sm text-moss hover:text-dusk rounded-md focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-fern" href="{{ route('login') }}">
                 Already registered?
             </a>
 
