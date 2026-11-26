@@ -33,7 +33,7 @@
                     Scam signal: <strong>{{ round($vacancy->scamProbability() * 100) }}%</strong>
                     <a href="{{ route('risk') }}#scam-signal" class="text-sm text-gray-500 underline ms-2">how is this calculated?</a>
                 </p>
-                @if ($vacancy->scamWords())
+                @if ($vacancy->scamProbability() >= 0.5 && $vacancy->scamWords())
                     <p class="text-gray-600">Words that raise it most: {{ implode(', ', $vacancy->scamWords()) }}</p>
                 @endif
                 <p class="text-sm text-gray-500">
