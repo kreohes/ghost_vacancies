@@ -21,7 +21,6 @@ class ReportController extends Controller
     {
         return view('userzone.reports.create', [
             'vacancies' => $this->vacancyOptions(),
-            'statuses' => $this->statusOptions(),
             'selectedVacancyId' => $request->query('vacancy_id'),
         ]);
     }
@@ -52,17 +51,6 @@ class ReportController extends Controller
 
         foreach (Vacancy::with('company')->orderBy('title')->get() as $vacancy) {
             $options[$vacancy->id] = $vacancy->title.' at '.$vacancy->company->name;
-        }
-
-        return $options;
-    }
-
-    private function statusOptions(): array
-    {
-        $options = [];
-
-        foreach (Report::STATUSES as $status) {
-            $options[$status] = $status;
         }
 
         return $options;
