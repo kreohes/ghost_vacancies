@@ -92,6 +92,25 @@
                 <li class="rounded-3xl bg-butter px-2 py-4"><strong class="block font-display text-3xl font-bold">0.78</strong><span class="text-moss">PR-AUC (random: 0.05)</span></li>
             </ul>
 
+            <h3 class="mt-8 font-display text-xl font-semibold">From a number to a label</h3>
+            <ul class="mt-3 grid gap-3 md:grid-cols-3">
+                <li class="rounded-3xl bg-butter p-5">
+                    <x-scam-badge label="likely scam" />
+                    <p class="mt-3 font-display text-lg font-semibold">{{ $likelyScamFrom }}% or more</p>
+                    <p class="mt-1 text-moss">On postings the model had not seen, 87% of these really were fraud.</p>
+                </li>
+                <li class="rounded-3xl bg-butter p-5">
+                    <x-scam-badge label="suspicious" />
+                    <p class="mt-3 font-display text-lg font-semibold">{{ $suspiciousFrom }}% to {{ $likelyScamFrom }}%</p>
+                    <p class="mt-1 text-moss">Worth a closer look. Together with the label above it catches 3 of 4 fraudulent postings.</p>
+                </li>
+                <li class="rounded-3xl bg-butter p-5">
+                    <x-scam-badge label="looks normal" />
+                    <p class="mt-3 font-display text-lg font-semibold">Below {{ $suspiciousFrom }}%</p>
+                    <p class="mt-1 text-moss">Nothing in the words looks like a typical scam. It can still be a ghost vacancy.</p>
+                </li>
+            </ul>
+
             <p class="mt-5 rounded-3xl bg-high-soft p-5 leading-relaxed text-high">
                 The model learned from public postings from 2012-2014 (the EMSCAD dataset), labelled as fraud, not as ghost vacancies.
                 Treat the number as a hint to read the posting more carefully, not as a verdict.
