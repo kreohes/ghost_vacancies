@@ -25,3 +25,4 @@ Thumbs.db
 
 # Public dataset for ml/train.py, downloaded separately
 /ml/data
+__pycache__/
