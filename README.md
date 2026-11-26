@@ -1,88 +1,67 @@
-<h1 align="center">Educational Starter Pack<br><sub>for</sub></h1>
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Ghost Vacancies
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Job seekers spend hours applying to vacancies where nobody is actually being hired.
+Ghost Vacancies lets applicants report what happened after they applied (silence, a reply or an interview)
+and turns these reports into a **ghost-risk label** for every vacancy and a **"no answer" rate** for every company.
 
+Built with Laravel 13, Blade, Tailwind and SQLite for the course *Modern Web Application 1: From Idea to MVP*.
 
----
-
-## About this Starter Pack
-
-This is a starter pack for **Laravel tailored for educational purposes**.
-
-It is aimed at helping students and beginners to quickly set up a Laravel development environment that allows for 
-learning the basics without the need to configure everything from scratch.
-
-### Changes from the original Laravel repository
-It provides a pre-configured environment with some opinionated settings and packages for the educational context. 
-Initial customisation was done based on Laravel version 12.x. (12.37.0 on November 9th, 2025).
-Updated to Laravel 13.x (13.42 on November 11th, 2026), running on PHP 8.5, including now also Laravel Boost.
-
-- Added **barryvdh/laravel-debugbar** for debug info in the browser
-- Altered **.env.example** for local development (SQLite database, debug mode on, cache and session set to file)
-- Added **roave/security-advisories** to prevent installation of packages with known security issues
-- Added **laravel/boost** for AI assisted code generation, including skills for Claude Code and Codex
-- Used **laravel/breeze** for authentication scaffolding with Blade templates (but moved all of the component views to a `components.breeze` subfolder for better organization; the Breeze package itself is no longer required)
-- Front-end assets are built with **Vite 8** and **Tailwind CSS 4**, with a fallback to **CDN includes of Tailwind CSS and Alpine JS** when no build is present
-- Replaced PHPUnit by **Pest PHP** for testing, kept basic example tests
-- Some other small tweaks in configuration files, routes, controller, and view organisation to better reflect the educational purpose (rigid structure)
-
-No front-end build is needed to get started. When there is no Vite build in `public/build`, the application falls back to CDN-hosted Tailwind CSS and Alpine JS. Running `npm run build` (or `npm run dev`) switches it to the compiled assets.
-
-Everything that follows below (and the shields in the header) are part of the original Laravel README.md file.
-
----
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Run it locally
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate:fresh --seed
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Open the site in Herd (`http://ghost-vacancies.test`) or with `php artisan serve`.
 
-## Contributing
+Seeded accounts (password `password` for all):
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Email | Role |
+|---|---|
+| admin@admin.com | admin, has own vacancies and reports |
+| test@example.com | normal user |
 
-## Code of Conduct
+## Data model
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Model | Fields | Relationships |
+|---|---|---|
+| User | name, email, password, is_admin | has many vacancies (added), has many reports |
+| Company | name, website | has many vacancies, has many reports through vacancies |
+| Vacancy | title, url, posted_at, company_id, user_id | belongs to company, belongs to user, has many reports |
+| Report | status, applied_at, comment, vacancy_id, user_id | belongs to vacancy, belongs to user |
 
-## Security Vulnerabilities
+A user can leave one report per vacancy (unique `vacancy_id` + `user_id`).
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## How the risk is calculated
 
-## License
+- Risk of a vacancy = share of its reports with status `silence`.
+- A silence report only counts when the application is older than 14 days.
+- With fewer than 3 counted reports the label is "not enough data".
+- high: 60% or more, medium: 30% to 60%, low: below 30%.
+- The company "no answer" rate uses the same rule over all its vacancies.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The rule lives in `app/Models/Report.php` (`countsForRisk`, `silenceShare`) and is tested in `tests/Feature/GhostRiskTest.php`.
+
+## Pages
+
+| Area | Pages |
+|---|---|
+| Public | home, about, risk explanation, vacancies list + page, companies list + page |
+| User zone (`/user`, login required) | dashboard, my reports (full CRUD), my vacancies (add, edit, delete), add a company |
+| Admin (`/admin`, `is_admin` only) | reports moderation, manage vacancies, manage companies |
+
+## Where to find things
+
+| What | Where |
+|---|---|
+| All routes | `routes/web.php` |
+| Public pages | `app/Http/Controllers/{Welcome,Page,Vacancy,Company}Controller.php` |
+| User zone | `app/Http/Controllers/Userzone/` |
+| Admin zone | `app/Http/Controllers/Admin/` + `app/Http/Middleware/EnsureUserIsAdmin.php` |
+| Menu (header and footer) | `app/View/Components/AppLayout.php` |
+| Form fields, status picker, badges | `resources/views/components/` |
+
+Run the tests with `php artisan test`.
