@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
+use App\Http\Controllers\Admin\VacancyController as AdminVacancyController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Userzone\CompanyController as UserCompanyController;
@@ -46,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('admin')->name('admin.')->middleware(EnsureUserIsAdmin::class)->group(function () {
         Route::resource('reports', AdminReportController::class)->only(['index', 'destroy']);
+        Route::resource('vacancies', AdminVacancyController::class)->only(['index', 'edit', 'update', 'destroy']);
     });
 
     // For the user's profile management
