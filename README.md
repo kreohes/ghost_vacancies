@@ -13,9 +13,16 @@ composer install
 cp .env.example .env
 php artisan key:generate
 php artisan migrate:fresh --seed
+php artisan storage:link
 ```
 
 Open the site in Herd (`http://ghost-vacancies.test`) or with `php artisan serve`.
+
+Emails go through the database queue and are written to `storage/logs/laravel.log` (`MAIL_MAILER=log`). Start a worker to send them:
+
+```bash
+php artisan queue:work
+```
 
 Seeded accounts (password `password` for all):
 
@@ -55,6 +62,11 @@ Next to the ghost risk, a vacancy with a description gets a **scam signal**: the
 - The probability becomes a label: **likely scam** from 50% (precision 0.87 on held-out data), **suspicious** from 20%, otherwise **looks normal**. Thresholds are constants in `ScamModel`.
 - The same check works for a pasted posting text on the link check page (`/check`).
 - Caveat: the labels mean *fraud*, not *ghost vacancy*. It is a hint, not a verdict.
+
+## Company logos and email
+
+- **Logo upload:** a company can get a logo (PNG, JPG or WebP up to 2 MB) when it is added or edited by an admin. Spatie Media Library stores it on the `public` disk and makes a 160×160 `thumb` version once, at upload. Without a logo the first letter of the name is shown. Code: `app/Models/Company.php` (`registerMediaCollections`, `registerMediaConversions`, `logoUrl`), `components/company-logo.blade.php`.
+- **Email:** when someone reports on a vacancy, its author gets an email with the status, the comment and the current ghost risk. The notification implements `ShouldQueue`, so the request does not wait for the mail. Nobody is emailed when you report on your own vacancy. Code: `app/Notifications/NewReportOnYourVacancy.php`, sent from `ReportController@store`.
 
 ## Pages
 
