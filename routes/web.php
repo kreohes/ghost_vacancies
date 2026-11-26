@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Userzone\CompanyController as UserCompanyController;
 use App\Http\Controllers\Userzone\DashboardController;
 use App\Http\Controllers\Userzone\ProfileController;
 use App\Http\Controllers\Userzone\ReportController;
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('user')->name('userzone.')->group(function () {
         Route::resource('reports', ReportController::class);
         Route::resource('vacancies', UserVacancyController::class)->except('show');
+        Route::resource('companies', UserCompanyController::class)->only(['create', 'store']);
     });
 
     // For the user's profile management
